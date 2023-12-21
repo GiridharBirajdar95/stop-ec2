@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Stop EC2 instance
+      amazon.aws.ec2_instance:
+        region: ap-south-1
+        id: i-065e63dbdb17c1e96
+        state: stopped
