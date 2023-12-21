@@ -1,9 +1,18 @@
 ---
-- hosts: all
-  gather_facts: false
+- hosts: localhost
+  become: true
+  roles:
+    - amazon.aws.ec2
+
   tasks:
-    - name: Stop EC2 instance
-      amazon.aws.ec2_instance:
-        region: ap-south-1
-        id: i-065e63dbdb17c1e96
+    - name: Stop EC2 instances by ID
+      ec2_instance:
         state: stopped
+        instance_ids:
+          - "i-065e63dbdb17c1e96"
+    - name: Wait for instances to stop
+      wait_for:
+        host: group_name
+        state: stopped
+        delay: 10
+        timeout: 120
