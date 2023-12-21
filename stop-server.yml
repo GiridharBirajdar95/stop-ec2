@@ -1,0 +1,8 @@
+---
+- hosts: your_server
+  become: yes
+  tasks:
+    - name: Stop service
+      systemd:
+        name: your_service
+        state: stopped
