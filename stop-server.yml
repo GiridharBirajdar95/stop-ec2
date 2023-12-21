@@ -1,5 +1,5 @@
 ---
-- hosts: your_server
+- hosts: all
   become: yes
   tasks:
     - name: Stop service
