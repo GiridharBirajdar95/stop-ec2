@@ -1,15 +1,10 @@
 ---
-- name: Stop EC2 Instance
+- name: Restart Server
   hosts: localhost
-  gather_facts: False
+  become: yes  # Run tasks with sudo (root) privileges
+
   tasks:
-    - name: Stop EC2 instance
-      ec2_instance:
-        instance_ids: i-065e63dbdb17c1e96
-        state: stopped
-      register: ec2_result
-
-    - name: Print EC2 stopping result
-      debug:
-        var: ec2_result
-
+    - name: Restart the Server
+      command: "reboot"
+      async: 0
+      poll: 0
